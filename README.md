@@ -637,6 +637,64 @@ http://127.0.0.1:8000/docs
 
 ---
 
+# Frontend Dashboard
+
+The project includes a React and TypeScript dashboard built with Vite, providing a user interface for accounting assistance, transaction workflows, knowledge-base access, AI evaluation metrics, monitoring, audit and safety information, and application settings.
+
+## Frontend Technology Stack
+
+- React
+- TypeScript
+- Vite
+- REST API integration
+- CSS
+
+## Run the Frontend Locally
+
+Open a second PowerShell terminal while the FastAPI backend is running.
+
+### 1. Navigate to the frontend directory
+
+```powershell
+cd "D:\AI Projects\ai-accounting-copilot\frontend"
+```
+
+### 2. Install dependencies
+
+```powershell
+npm install
+```
+
+### 3. Configure the API URL
+
+Create a `.env` file inside the `frontend` directory with the following setting:
+
+```text
+VITE_API_BASE_URL=http://127.0.0.1:8000
+```
+
+This configures the frontend to communicate with the local FastAPI backend.
+
+### 4. Start the development server
+
+```powershell
+npm run dev
+```
+
+Open the local URL printed by Vite in the terminal.
+
+Keep the backend and frontend running in separate terminals.
+
+## Production Build
+
+To verify that the frontend compiles for production:
+
+```powershell
+npm run build
+```
+
+The generated production assets are written to `frontend/dist/`. This generated directory is excluded from version control.
+
 # Production-Style Local Startup
 
 The repository includes:
