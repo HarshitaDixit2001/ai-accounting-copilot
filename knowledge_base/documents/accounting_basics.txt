@@ -1,0 +1,69 @@
+Accounting Basics
+
+Accounting is the process of recording, classifying, summarizing, and interpreting financial transactions.
+
+The accounting equation is:
+
+Assets = Liabilities + Equity
+
+Assets are resources controlled by a business.
+Examples include cash, inventory, equipment, and accounts receivable.
+
+Liabilities are obligations owed by a business.
+Examples include accounts payable, loans, and outstanding expenses.
+
+Equity represents the owner's residual interest in the business after liabilities are deducted from assets.
+
+Revenue is income earned from normal business activities.
+
+Expenses are costs incurred to generate revenue.
+
+The double-entry accounting system records the effect of each financial transaction in at least two accounts.
+
+For a valid double-entry transaction:
+
+Total Debits = Total Credits
+
+Examples of common account types:
+
+Assets:
+Cash
+Bank
+Inventory
+Accounts Receivable
+Equipment
+
+Liabilities:
+Accounts Payable
+Loans Payable
+Outstanding Expenses
+
+Equity:
+Owner's Capital
+Retained Earnings
+
+Revenue:
+Sales Revenue
+Service Revenue
+
+Expenses:
+Rent Expense
+Salary Expense
+Office Supplies Expense
+Utilities Expense
+
+Debit and Credit
+
+Every accounting transaction affects at least two accounts using the double-entry accounting system.
+
+A debit is recorded on the left side of an account.
+
+A credit is recorded on the right side of an account.
+
+Debits generally increase asset and expense accounts and decrease liability, equity, and revenue accounts.
+
+Credits generally increase liability, equity, and revenue accounts and decrease asset and expense accounts.
+
+For every balanced journal entry:
+
+Total Debits = Total Credits

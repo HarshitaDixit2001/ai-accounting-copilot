@@ -1,0 +1,44 @@
+Financial Transactions
+
+A financial transaction is an economic event that can be measured in monetary terms and affects the financial position of a business.
+
+Common financial transactions include:
+
+1. Capital Investment
+When an owner invests cash into the business:
+Debit: Cash
+Credit: Owner's Capital
+
+2. Payment of Rent
+When rent is paid:
+Debit: Rent Expense
+Credit: Cash or Bank
+
+3. Payment of Salary
+When salary is paid:
+Debit: Salary Expense
+Credit: Cash or Bank
+
+4. Purchase of Equipment for Cash
+When equipment is purchased using cash:
+Debit: Equipment
+Credit: Cash
+
+5. Receipt from Customer
+When money is received from a customer:
+Debit: Cash or Bank
+Credit: Accounts Receivable
+
+6. Payment to Supplier
+When an amount owed to a supplier is paid:
+Debit: Accounts Payable
+Credit: Cash or Bank
+
+Before recording a transaction, identify:
+- What happened?
+- Which accounts are affected?
+- Which account should be debited?
+- Which account should be credited?
+- What is the transaction amount?
+
+The accounting entry should maintain the equality between total debits and total credits.

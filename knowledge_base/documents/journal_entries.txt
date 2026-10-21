@@ -1,0 +1,48 @@
+Journal Entries
+
+A journal entry is a record of a financial transaction in an accounting system.
+
+A basic journal entry contains at least one debit account and one credit account.
+The total debit amount must equal the total credit amount.
+
+Debit represents the left side of a journal entry.
+Credit represents the right side of a journal entry.
+
+Common examples:
+
+1. Cash Expense
+When an expense is paid using cash:
+Debit: Expense Account
+Credit: Cash
+
+Example:
+A company pays ₹5,000 for office supplies in cash.
+Debit: Office Supplies Expense ₹5,000
+Credit: Cash ₹5,000
+
+2. Credit Purchase
+When goods are purchased on credit:
+Debit: Purchases or Inventory
+Credit: Accounts Payable
+
+Example:
+Goods worth ₹20,000 are purchased on credit.
+Debit: Inventory ₹20,000
+Credit: Accounts Payable ₹20,000
+
+3. Cash Sale
+When goods are sold for cash:
+Debit: Cash
+Credit: Sales Revenue
+
+Example:
+Goods are sold for ₹15,000 in cash.
+Debit: Cash ₹15,000
+Credit: Sales Revenue ₹15,000
+
+4. Credit Sale
+When goods are sold on credit:
+Debit: Accounts Receivable
+Credit: Sales Revenue
+
+Every journal entry should be supported by the relevant transaction information.

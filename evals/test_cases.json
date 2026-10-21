@@ -1,0 +1,83 @@
+[
+  {
+    "id": "accounting_001",
+    "category": "accounting_concept",
+    "question": "What is a journal entry?",
+    "expected_keywords": [
+      "debit",
+      "credit"
+    ],
+    "expected_sources": [
+      "journal_entries.txt"
+    ]
+  },
+  {
+    "id": "accounting_002",
+    "category": "transaction",
+    "question": "Rent paid in cash ₹25000",
+    "expected_keywords": [
+      "Rent Expense",
+      "Cash",
+      "25000"
+    ],
+    "expected_sources": [
+      "journal_entries.txt"
+    ]
+  },
+  {
+    "id": "accounting_003",
+    "category": "transaction",
+    "question": "Rent paid in cash ₹5000",
+    "expected_keywords": [
+      "Rent Expense",
+      "Cash",
+      "5000"
+    ],
+    "expected_sources": [
+      "journal_entries.txt"
+    ]
+  },
+  {
+    "id": "accounting_004",
+    "category": "accounting_concept",
+    "question": "What is a debit?",
+    "expected_keywords": [
+      "debit"
+    ],
+    "expected_sources": [
+      "accounting_basics.txt"
+    ]
+  },
+  {
+    "id": "accounting_005",
+    "category": "accounting_concept",
+    "question": "What is a credit?",
+    "expected_keywords": [
+      "credit"
+    ],
+    "expected_sources": [
+      "accounting_basics.txt"
+    ]
+  },
+  {
+  "id": "accounting_006",
+  "category": "accounting_concept",
+  "question": "What is depreciation expense?",
+  "expected_keywords": ["depreciation"],
+  "expected_sources": ["accounting_basics.txt"]
+  },
+{
+  "id": "accounting_007",
+  "category": "unsupported",
+  "question": "What is the accounting treatment for cryptocurrency staking rewards?",
+  "expected_keywords": ["does not contain enough information"],
+  "expected_sources": []
+},
+{
+  "id": "accounting_008",
+  "category": "unsupported",
+  "question": "How should a company account for a complex foreign currency derivative?",
+  "expected_keywords": ["does not contain enough information"],
+  "expected_sources": []
+}
+]

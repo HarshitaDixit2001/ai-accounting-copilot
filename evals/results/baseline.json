@@ -1,0 +1,10 @@
+{
+  "description": "Baseline evaluation metrics for AI Accounting Copilot",
+  "pass_rate": 1.0,
+  "average_keyword_score": 0.868,
+  "average_source_score": 1.0,
+  "average_grounding_score": 0.88,
+  "average_completeness_score": 1.0,
+  "average_confidence": 0.664,
+  "average_evaluator_score": 0.75
+}

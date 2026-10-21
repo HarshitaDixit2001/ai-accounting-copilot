@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-10-06T16:32:51.908155+00:00",
+  "total_cases": 1,
+  "passed_cases": 1,
+  "pass_rate": 1.0,
+  "baseline_pass_rate": null,
+  "regression_detected": false,
+  "average_keyword_score": 0.667,
+  "average_source_score": 1.0,
+  "average_grounding_score": 0.7,
+  "average_completeness_score": 1.0,
+  "average_evaluator_score": 1.0,
+  "average_confidence": 0.618,
+  "cases": [
+    {
+      "id": "accounting_002",
+      "category": "transaction",
+      "question": "Rent paid in cash \u20b925000",
+      "keyword_score": 0.667,
+      "source_score": 1.0,
+      "grounding_score": 0.7,
+      "completeness_score": 1.0,
+      "evaluator_score": 1.0,
+      "evaluator_passed": true,
+      "evaluator_type": "normal_response",
+      "evaluator_checks": {
+        "response_present": true,
+        "sources_present": true,
+        "accounting_terminology": true,
+        "grounded_in_sources": true,
+        "question_relevance": true
+      },
+      "confidence": 0.618,
+      "retrieved_sources": [
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.618
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 1,
+          "similarity": 0.553
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 0,
+          "similarity": 0.532
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.489
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 1,
+          "similarity": 0.465
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

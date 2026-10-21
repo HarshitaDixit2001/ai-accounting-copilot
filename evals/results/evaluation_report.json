@@ -1,0 +1,267 @@
+{
+  "timestamp": "2026-10-03T13:06:58.440737+00:00",
+  "total_cases": 8,
+  "passed_cases": 8,
+  "pass_rate": 1.0,
+  "baseline_pass_rate": 1.0,
+  "regression_detected": true,
+  "average_keyword_score": 0.917,
+  "average_source_score": 1.0,
+  "average_grounding_score": 0.613,
+  "average_completeness_score": 0.812,
+  "average_confidence": 0.496,
+  "cases": [
+    {
+      "id": "accounting_001",
+      "category": "accounting_concept",
+      "question": "What is a journal entry?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 1.0,
+      "completeness_score": 1.0,
+      "confidence": 0.783,
+      "retrieved_sources": [
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.783
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.536
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 1,
+          "similarity": 0.504
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 2,
+          "similarity": 0.475
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 0,
+          "similarity": 0.472
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_002",
+      "category": "transaction",
+      "question": "Rent paid in cash \u20b925000",
+      "keyword_score": 0.667,
+      "source_score": 1.0,
+      "grounding_score": 0.8,
+      "completeness_score": 1.0,
+      "confidence": 0.618,
+      "retrieved_sources": [
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.618
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 1,
+          "similarity": 0.553
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 0,
+          "similarity": 0.532
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.489
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 1,
+          "similarity": 0.465
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_003",
+      "category": "transaction",
+      "question": "Rent paid in cash \u20b95000",
+      "keyword_score": 0.667,
+      "source_score": 1.0,
+      "grounding_score": 0.7,
+      "completeness_score": 1.0,
+      "confidence": 0.618,
+      "retrieved_sources": [
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.618
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 1,
+          "similarity": 0.57
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 0,
+          "similarity": 0.516
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.516
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 2,
+          "similarity": 0.473
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_004",
+      "category": "accounting_concept",
+      "question": "What is a debit?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 1.0,
+      "completeness_score": 1.0,
+      "confidence": 0.644,
+      "retrieved_sources": [
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 2,
+          "similarity": 0.644
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 3,
+          "similarity": 0.641
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.631
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 1,
+          "similarity": 0.613
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.609
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_005",
+      "category": "accounting_concept",
+      "question": "What is a credit?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 1.0,
+      "completeness_score": 1.0,
+      "confidence": 0.639,
+      "retrieved_sources": [
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 2,
+          "similarity": 0.639
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.635
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "similarity": 0.619
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 1,
+          "similarity": 0.614
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 3,
+          "similarity": 0.598
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_006",
+      "category": "accounting_concept",
+      "question": "What is depreciation expense?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 0.4,
+      "completeness_score": 0.5,
+      "confidence": 0.669,
+      "retrieved_sources": [
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 2,
+          "similarity": 0.669
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 1,
+          "similarity": 0.64
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 3,
+          "similarity": 0.637
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "similarity": 0.635
+        },
+        {
+          "source": "financial_transactions.txt",
+          "chunk_id": 2,
+          "similarity": 0.599
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "accounting_007",
+      "category": "unsupported",
+      "question": "What is the accounting treatment for cryptocurrency staking rewards?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 0.0,
+      "completeness_score": 0.5,
+      "confidence": 0.0,
+      "retrieved_sources": [],
+      "passed": true
+    },
+    {
+      "id": "accounting_008",
+      "category": "unsupported",
+      "question": "How should a company account for a complex foreign currency derivative?",
+      "keyword_score": 1.0,
+      "source_score": 1.0,
+      "grounding_score": 0.0,
+      "completeness_score": 0.5,
+      "confidence": 0.0,
+      "retrieved_sources": [],
+      "passed": true
+    }
+  ]
+}
