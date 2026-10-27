@@ -99,16 +99,29 @@ def evaluate_accounting_response(
         for term in accounting_terms
     )
 
-    # Retrieved evidence should contain actual source content.
+    # Source content must overlap meaningfully with the response.
+    source_text = " ".join(
+        str(source.get("content", ""))
+        for source in sources
+        if source.get("content")
+    ).lower()
+
+    response_terms = {
+        word.strip(".,!?;:()[]{}\"'")
+        for word in response_lower.split()
+        if len(word.strip(".,!?;:()[]{}\"'")) > 3
+    }
+
+    source_terms = {
+        word.strip(".,!?;:()[]{}\"'")
+        for word in source_text.split()
+        if len(word.strip(".,!?;:()[]{}\"'")) > 3
+    }
+
     checks["grounded_in_sources"] = (
-        any(
-            source.get("source")
-            and source.get("content")
-            for source in sources
-        )
-        if sources
-        else False
+    len(response_terms & source_terms) >= 2
     )
+
 
     # Question should influence the response.
     question_terms = [
