@@ -1,3 +1,4 @@
+from unittest import result
 from app.services.evaluator import evaluate_accounting_response
 
 
@@ -114,4 +115,28 @@ def test_evaluator_rejects_sources_without_relevant_evidence():
     )
 
     assert result["checks"]["grounded_in_sources"] is False
+    assert result["passed"] is False
+
+
+
+def test_evaluator_reports_failed_checks():
+    result = evaluate_accounting_response(
+        question="How do I calculate depreciation?",
+        response=(
+            "Depreciation is calculated by dividing the depreciable "
+            "amount by the useful life of the asset."
+        ),
+        sources=[
+            {
+                "source": "financial_transactions.txt",
+                "chunk_id": 1,
+                "content": (
+                    "Payment of Rent: Debit Rent Expense; "
+                    "Credit Cash."
+                ),
+            }
+        ],
+    )
+
+    assert "grounded_in_sources" in result["failed_checks"]
     assert result["passed"] is False
