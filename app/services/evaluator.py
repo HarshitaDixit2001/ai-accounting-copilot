@@ -142,7 +142,11 @@ def evaluate_accounting_response(
 
     return {
         "score": score,
-        "passed": score >= 0.75,
+        "passed": (
+            score >= 0.75
+            and checks["question_relevance"]
+            and checks["grounded_in_sources"]
+        ),
         "evaluation_type": "normal_response",
         "checks": checks,
         "passed_checks": passed_checks,

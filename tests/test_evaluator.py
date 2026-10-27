@@ -71,3 +71,25 @@ def test_evaluator_returns_structured_result():
     assert "checks" in result
     assert "passed_checks" in result
     assert "total_checks" in result
+
+
+def test_evaluator_rejects_irrelevant_accounting_response():
+    result = evaluate_accounting_response(
+        question="How do I calculate depreciation?",
+        response=(
+            "Debit Rent Expense and credit Cash for rent paid."
+        ),
+        sources=[
+            {
+                "source": "financial_transactions.txt",
+                "chunk_id": 1,
+                "content": (
+                    "Payment of Rent: Debit Rent Expense; "
+                    "Credit Cash."
+                ),
+            }
+        ],
+    )
+
+    assert result["checks"]["question_relevance"] is False
+    assert result["passed"] is False
