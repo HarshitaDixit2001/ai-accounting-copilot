@@ -56,6 +56,9 @@ def classify_transaction(
     Apply deterministic accounting rules to classify
     supported transaction descriptions.
     """
+    if amount <= 0:
+        return None
+
     description_lower = description.lower()
 
     if "rent" in description_lower and "cash" in description_lower:
