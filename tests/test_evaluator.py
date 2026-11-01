@@ -1,4 +1,3 @@
-from unittest import result
 from app.services.evaluator import evaluate_accounting_response
 
 
@@ -140,3 +139,48 @@ def test_evaluator_reports_failed_checks():
 
     assert "grounded_in_sources" in result["failed_checks"]
     assert result["passed"] is False
+
+def test_evaluator_records_metrics_by_default(monkeypatch):
+    recorded_scores = []
+
+    monkeypatch.setattr(
+        "app.services.evaluator.record_evaluator_score",
+        lambda score: recorded_scores.append(score),
+    )
+
+    evaluate_accounting_response(
+        question="How do I record rent?",
+        response="Debit Rent Expense and credit Cash.",
+        sources=[
+            {
+                "source": "journal_entries.txt",
+                "chunk_id": 1,
+                "content": "Debit Rent Expense and credit Cash.",
+            }
+        ],
+    )
+
+    assert len(recorded_scores) == 1
+
+def test_evaluator_skips_metrics_when_disabled(monkeypatch):
+    recorded_scores = []
+
+    monkeypatch.setattr(
+        "app.services.evaluator.record_evaluator_score",
+        lambda score: recorded_scores.append(score),
+    )
+
+    evaluate_accounting_response(
+        question="How do I record rent?",
+        response="Debit Rent Expense and credit Cash.",
+        sources=[
+            {
+                "source": "journal_entries.txt",
+                "chunk_id": 1,
+                "content": "Debit Rent Expense and credit Cash.",
+            }
+        ],
+        record_metrics=False,
+    )
+
+    assert recorded_scores == []

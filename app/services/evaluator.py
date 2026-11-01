@@ -18,6 +18,7 @@ def evaluate_accounting_response(
     question: str,
     response: str,
     sources: list[dict[str, Any]],
+    record_metrics: bool = True,
 ) -> dict[str, Any]:
     """
     Evaluate an accounting assistant response using a deterministic rubric.
@@ -47,7 +48,8 @@ def evaluate_accounting_response(
         total_checks = len(checks)
         score = round(passed_checks / total_checks, 3)
 
-        record_evaluator_score(score)
+        if record_metrics:
+            record_evaluator_score(score)
 
         return {
             "score": score,
@@ -119,8 +121,8 @@ def evaluate_accounting_response(
     passed_checks = sum(checks.values())
     total_checks = len(checks)
     score = round(passed_checks / total_checks, 3) if total_checks else 0.0
-
-    record_evaluator_score(score)
+    if record_metrics:
+        record_evaluator_score(score)
 
     failed_checks = [
         name for name, passed in checks.items() if not passed

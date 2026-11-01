@@ -1,0 +1,724 @@
+{
+  "timestamp": "2026-11-01T16:43:46.170826+00:00",
+  "dataset": "test_cases.json",
+  "total_cases": 8,
+  "models": [
+    {
+      "model": "qwen3:8b",
+      "total_cases": 8,
+      "passed_cases": 8,
+      "failed_cases": 0,
+      "pass_rate": 1.0,
+      "average_keyword_score": 0.917,
+      "average_source_score": 1.0,
+      "average_grounding_score": 0.75,
+      "average_completeness_score": 0.875,
+      "average_evaluator_score": 1.0,
+      "average_latency_ms": 42155.96,
+      "latency_sample_count": 6,
+      "total_prompt_tokens": 6111,
+      "total_completion_tokens": 699,
+      "total_tokens": 6810,
+      "monetary_cost": null,
+      "cost_note": "Local Ollama monetary cost is not configured.",
+      "release_eligible": true,
+      "cases": [
+        {
+          "id": "accounting_001",
+          "category": "accounting_concept",
+          "question": "What is a journal entry?",
+          "response": "A journal entry is a record of a financial transaction in an accounting system. It is part of the double-entry accounting method, where every transaction affects at least two accounts. In a journal entry, debits are recorded on the left side, and credits are recorded on the right side. The total debit amount must equal the total credit amount to maintain the accounting equation (Assets = Liabilities + Equity). This ensures the accuracy and balance of financial records. Journal entries are used to document all business transactions, such as expenses, revenues, asset purchases, and liability payments.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.783,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.783
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.536
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.504
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.475
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 0,
+              "similarity": 0.472
+            }
+          ],
+          "generation_metadata": {
+            "response": "A journal entry is a record of a financial transaction in an accounting system. It is part of the double-entry accounting method, where every transaction affects at least two accounts. In a journal entry, debits are recorded on the left side, and credits are recorded on the right side. The total debit amount must equal the total credit amount to maintain the accounting equation (Assets = Liabilities + Equity). This ensures the accuracy and balance of financial records. Journal entries are used to document all business transactions, such as expenses, revenues, asset purchases, and liability payments.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 1021,
+            "completion_tokens": 114,
+            "total_tokens": 1135,
+            "latency_ms": 32149.11,
+            "ollama_duration_ms": 31846.61
+          }
+        },
+        {
+          "id": "accounting_002",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b925000",
+          "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the company's cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b925,000  \n- Credit: Cash \u20b925,000  \n\n**Explanation**  \nThe **Rent Expense** account is debited because the company incurred an expense by paying rent. The **Cash** account is credited because the company's cash balance decreased as a result of the payment. This entry follows the principle that expenses increase with a debit, and assets like cash decrease with a credit.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.553
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.532
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.489
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.465
+            }
+          ],
+          "generation_metadata": {
+            "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the company's cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b925,000  \n- Credit: Cash \u20b925,000  \n\n**Explanation**  \nThe **Rent Expense** account is debited because the company incurred an expense by paying rent. The **Cash** account is credited because the company's cash balance decreased as a result of the payment. This entry follows the principle that expenses increase with a debit, and assets like cash decrease with a credit.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 1122,
+            "completion_tokens": 125,
+            "total_tokens": 1247,
+            "latency_ms": 33517.62,
+            "ollama_duration_ms": 33217.39
+          }
+        },
+        {
+          "id": "accounting_003",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b95000",
+          "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b95,000  \n- Credit: Cash \u20b95,000  \n\n**Explanation**  \nThe **Rent Expense** account is debited because expenses increase with debits. The **Cash** account is credited because the business is spending cash, reducing its balance. This entry reflects the payment of rent, which is an operating expense.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.57
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.516
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.516
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.473
+            }
+          ],
+          "generation_metadata": {
+            "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b95,000  \n- Credit: Cash \u20b95,000  \n\n**Explanation**  \nThe **Rent Expense** account is debited because expenses increase with debits. The **Cash** account is credited because the business is spending cash, reducing its balance. This entry reflects the payment of rent, which is an operating expense.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 1111,
+            "completion_tokens": 108,
+            "total_tokens": 1219,
+            "latency_ms": 34872.22,
+            "ollama_duration_ms": 34584.43
+          }
+        },
+        {
+          "id": "accounting_004",
+          "category": "accounting_concept",
+          "question": "What is a debit?",
+          "response": "A **debit** is an accounting entry that is recorded on the **left side** of a journal entry. It generally **increases asset and expense accounts** and **decreases liability, equity, and revenue accounts**. For example, when a company pays cash for office supplies, the **Expense Account** is debited to recognize the cost, while the **Cash Account** is credited to show the reduction in cash. Debits and credits must always balance in a journal entry to maintain the fundamental accounting equation: **Total Debits = Total Credits**.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.644,
+          "retrieved_sources": [
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.644
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.641
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.631
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.613
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.609
+            }
+          ],
+          "generation_metadata": {
+            "response": "A **debit** is an accounting entry that is recorded on the **left side** of a journal entry. It generally **increases asset and expense accounts** and **decreases liability, equity, and revenue accounts**. For example, when a company pays cash for office supplies, the **Expense Account** is debited to recognize the cost, while the **Cash Account** is credited to show the reduction in cash. Debits and credits must always balance in a journal entry to maintain the fundamental accounting equation: **Total Debits = Total Credits**.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 933,
+            "completion_tokens": 114,
+            "total_tokens": 1047,
+            "latency_ms": 49714.11,
+            "ollama_duration_ms": 49426.82
+          }
+        },
+        {
+          "id": "accounting_005",
+          "category": "accounting_concept",
+          "question": "What is a credit?",
+          "response": "A **credit** is the right side of a journal entry in accounting. It represents the opposite of a debit and is used to record increases in liability, equity, and revenue accounts, while simultaneously recording decreases in asset and expense accounts. For example, when a company receives cash from a customer, the **Cash** account is debited (increased), and the **Sales Revenue** account is credited (increased). Credits ensure that the accounting equation remains balanced, as total debits always equal total credits.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.639,
+          "retrieved_sources": [
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.639
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.635
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.619
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.614
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.598
+            }
+          ],
+          "generation_metadata": {
+            "response": "A **credit** is the right side of a journal entry in accounting. It represents the opposite of a debit and is used to record increases in liability, equity, and revenue accounts, while simultaneously recording decreases in asset and expense accounts. For example, when a company receives cash from a customer, the **Cash** account is debited (increased), and the **Sales Revenue** account is credited (increased). Credits ensure that the accounting equation remains balanced, as total debits always equal total credits.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 977,
+            "completion_tokens": 103,
+            "total_tokens": 1080,
+            "latency_ms": 47500.32,
+            "ollama_duration_ms": 47211.32
+          }
+        },
+        {
+          "id": "accounting_006",
+          "category": "accounting_concept",
+          "question": "What is depreciation expense?",
+          "response": "Depreciation expense is the systematic allocation of the cost of a tangible asset over its useful life. It represents the reduction in value of an asset due to usage, wear and tear, or obsolescence. Depreciation is recorded as an expense on the income statement, reducing net income. \n\n**Accounting Treatment:**\n- **Debit:** Depreciation Expense (an expense account, which increases with a debit)\n- **Credit:** Accumulated Depreciation (a contra-asset account, which increases with a credit)\n\nThis entry reflects the decline in value of the asset over time and matches the expense with the period in which the asset is used.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.669,
+          "retrieved_sources": [
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.669
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.64
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.637
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.635
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.599
+            }
+          ],
+          "generation_metadata": {
+            "response": "Depreciation expense is the systematic allocation of the cost of a tangible asset over its useful life. It represents the reduction in value of an asset due to usage, wear and tear, or obsolescence. Depreciation is recorded as an expense on the income statement, reducing net income. \n\n**Accounting Treatment:**\n- **Debit:** Depreciation Expense (an expense account, which increases with a debit)\n- **Credit:** Accumulated Depreciation (a contra-asset account, which increases with a credit)\n\nThis entry reflects the decline in value of the asset over time and matches the expense with the period in which the asset is used.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 947,
+            "completion_tokens": 135,
+            "total_tokens": 1082,
+            "latency_ms": 55182.36,
+            "ollama_duration_ms": 54861.42
+          }
+        },
+        {
+          "id": "accounting_007",
+          "category": "unsupported",
+          "question": "What is the accounting treatment for cryptocurrency staking rewards?",
+          "response": "The provided accounting knowledge does not contain enough information to answer this question.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 0.0,
+          "completeness_score": 0.5,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.0,
+          "retrieved_sources": [],
+          "generation_metadata": null
+        },
+        {
+          "id": "accounting_008",
+          "category": "unsupported",
+          "question": "How should a company account for a complex foreign currency derivative?",
+          "response": "The provided accounting knowledge does not contain enough information to answer this question.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 0.0,
+          "completeness_score": 0.5,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.0,
+          "retrieved_sources": [],
+          "generation_metadata": null
+        }
+      ]
+    },
+    {
+      "model": "llama3.2:latest",
+      "total_cases": 8,
+      "passed_cases": 8,
+      "failed_cases": 0,
+      "pass_rate": 1.0,
+      "average_keyword_score": 0.917,
+      "average_source_score": 1.0,
+      "average_grounding_score": 0.75,
+      "average_completeness_score": 0.875,
+      "average_evaluator_score": 1.0,
+      "average_latency_ms": 22973.84,
+      "latency_sample_count": 6,
+      "total_prompt_tokens": 5985,
+      "total_completion_tokens": 647,
+      "total_tokens": 6632,
+      "monetary_cost": null,
+      "cost_note": "Local Ollama monetary cost is not configured.",
+      "release_eligible": true,
+      "cases": [
+        {
+          "id": "accounting_001",
+          "category": "accounting_concept",
+          "question": "What is a journal entry?",
+          "response": "A journal entry is a record of a financial transaction in an accounting system. It contains at least one debit account and one credit account, with the total debit amount equaling the total credit amount. The journal entry is supported by the transaction information and is a fundamental concept in the double-entry accounting system.\n\nEvery journal entry is a valid transaction that affects at least two accounts. The total debit amount is recorded on the left side of the account, while the total credit amount is recorded on the right side of the account. Debits generally increase the value of the corresponding account, while credits decrease its value.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.783,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.783
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.536
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.504
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.475
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 0,
+              "similarity": 0.472
+            }
+          ],
+          "generation_metadata": {
+            "response": "A journal entry is a record of a financial transaction in an accounting system. It contains at least one debit account and one credit account, with the total debit amount equaling the total credit amount. The journal entry is supported by the transaction information and is a fundamental concept in the double-entry accounting system.\n\nEvery journal entry is a valid transaction that affects at least two accounts. The total debit amount is recorded on the left side of the account, while the total credit amount is recorded on the right side of the account. Debits generally increase the value of the corresponding account, while credits decrease its value.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1010,
+            "completion_tokens": 121,
+            "total_tokens": 1131,
+            "latency_ms": 38734.87,
+            "ollama_duration_ms": 38442.71
+          }
+        },
+        {
+          "id": "accounting_002",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b925000",
+          "response": "For the rent paid in cash \u20b925,000, the accounting treatment is:\n\n**Journal Entry**\n- Debit: Rent Expense \u20b925,000\n- Credit: Cash \u20b925,000\n\nThis entry is made because rent paid in cash increases the expense account, and it is recorded on the left side of the journal entry, which represents debits. The cash account is credited because it decreases the cash account, which is recorded on the right side of the journal entry, which represents credits.\n\nThe reason for debiting Rent Expense and crediting Cash is that the rent expense increases the cost of operating the business, while the cash account decreases the company's cash balance.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.553
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.532
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.489
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.465
+            }
+          ],
+          "generation_metadata": {
+            "response": "For the rent paid in cash \u20b925,000, the accounting treatment is:\n\n**Journal Entry**\n- Debit: Rent Expense \u20b925,000\n- Credit: Cash \u20b925,000\n\nThis entry is made because rent paid in cash increases the expense account, and it is recorded on the left side of the journal entry, which represents debits. The cash account is credited because it decreases the cash account, which is recorded on the right side of the journal entry, which represents credits.\n\nThe reason for debiting Rent Expense and crediting Cash is that the rent expense increases the cost of operating the business, while the cash account decreases the company's cash balance.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1087,
+            "completion_tokens": 136,
+            "total_tokens": 1223,
+            "latency_ms": 27544.98,
+            "ollama_duration_ms": 27258.41
+          }
+        },
+        {
+          "id": "accounting_003",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b95000",
+          "response": "Is the user asking about the accounting treatment for rent paid in cash?\n\nThe accounting treatment for rent paid in cash is as follows:\n\n**Journal Entry**\nDebit: Rent Expense \u20b95,000\nCredit: Cash \u20b95,000\n\nThe reason for this treatment is that the rent expense increases the company's expense account, while the cash increases the cash account. By recording the cash payment on the right side (credit) of the cash account, and the rent expense on the left side (debit) of the rent expense account, the double-entry accounting system is maintained.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.57
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.516
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.516
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.473
+            }
+          ],
+          "generation_metadata": {
+            "response": "Is the user asking about the accounting treatment for rent paid in cash?\n\nThe accounting treatment for rent paid in cash is as follows:\n\n**Journal Entry**\nDebit: Rent Expense \u20b95,000\nCredit: Cash \u20b95,000\n\nThe reason for this treatment is that the rent expense increases the company's expense account, while the cash increases the cash account. By recording the cash payment on the right side (credit) of the cash account, and the rent expense on the left side (debit) of the rent expense account, the double-entry accounting system is maintained.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1077,
+            "completion_tokens": 116,
+            "total_tokens": 1193,
+            "latency_ms": 16243.11,
+            "ollama_duration_ms": 15951.94
+          }
+        },
+        {
+          "id": "accounting_004",
+          "category": "accounting_concept",
+          "question": "What is a debit?",
+          "response": "A debit is an account that is increased by the transaction amount when recorded in a journal entry. Debits generally increase asset and expense accounts and decrease liability, equity, and revenue accounts.\n\nExample: In the journal entry \"\u20b915,000 in cash\", Cash is debited \u20b915,000 and Sales Revenue is credited \u20b915,000.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.644,
+          "retrieved_sources": [
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.644
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.641
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.631
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.613
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.609
+            }
+          ],
+          "generation_metadata": {
+            "response": "A debit is an account that is increased by the transaction amount when recorded in a journal entry. Debits generally increase asset and expense accounts and decrease liability, equity, and revenue accounts.\n\nExample: In the journal entry \"\u20b915,000 in cash\", Cash is debited \u20b915,000 and Sales Revenue is credited \u20b915,000.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 922,
+            "completion_tokens": 71,
+            "total_tokens": 993,
+            "latency_ms": 16430.92,
+            "ollama_duration_ms": 16143.95
+          }
+        },
+        {
+          "id": "accounting_005",
+          "category": "accounting_concept",
+          "question": "What is a credit?",
+          "response": "**Definition of a Credit**\n\nA credit is an account that is increased by a debit, and is generally found in the following accounts:\n\n- Liability\n- Equity\n- Revenue\n\nAccounts that are increased by a credit, such as Accounts Receivable, Accounts Payable, and Inventory, are typically found in the asset section.\n\nDebits generally increase asset and expense accounts, and decrease liability, equity, and revenue accounts, which are typically found in the credit section.\n\nIn a journal entry, a credit is the account on the right side of the entry.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.639,
+          "retrieved_sources": [
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.639
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.635
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.619
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.614
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.598
+            }
+          ],
+          "generation_metadata": {
+            "response": "**Definition of a Credit**\n\nA credit is an account that is increased by a debit, and is generally found in the following accounts:\n\n- Liability\n- Equity\n- Revenue\n\nAccounts that are increased by a credit, such as Accounts Receivable, Accounts Payable, and Inventory, are typically found in the asset section.\n\nDebits generally increase asset and expense accounts, and decrease liability, equity, and revenue accounts, which are typically found in the credit section.\n\nIn a journal entry, a credit is the account on the right side of the entry.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 945,
+            "completion_tokens": 112,
+            "total_tokens": 1057,
+            "latency_ms": 20090.5,
+            "ollama_duration_ms": 19802.84
+          }
+        },
+        {
+          "id": "accounting_006",
+          "category": "accounting_concept",
+          "question": "What is depreciation expense?",
+          "response": "The accounting treatment for depreciation expense is as follows:\n\n**Depreciation Expense**\n\nDebit: Depreciation Expense (Expense account)\nCredit: Equipment (Asset account)\n\nDepreciation expense is recorded as a decrease in the Equipment asset account, which represents the residual value of the asset after its useful life. This decrease is offset by a corresponding increase in Depreciation Expense, which represents the expense incurred to deplete the asset's useful life.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.669,
+          "retrieved_sources": [
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.669
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.64
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 3,
+              "similarity": 0.637
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.635
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 2,
+              "similarity": 0.599
+            }
+          ],
+          "generation_metadata": {
+            "response": "The accounting treatment for depreciation expense is as follows:\n\n**Depreciation Expense**\n\nDebit: Depreciation Expense (Expense account)\nCredit: Equipment (Asset account)\n\nDepreciation expense is recorded as a decrease in the Equipment asset account, which represents the residual value of the asset after its useful life. This decrease is offset by a corresponding increase in Depreciation Expense, which represents the expense incurred to deplete the asset's useful life.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 944,
+            "completion_tokens": 91,
+            "total_tokens": 1035,
+            "latency_ms": 18798.68,
+            "ollama_duration_ms": 18510.71
+          }
+        },
+        {
+          "id": "accounting_007",
+          "category": "unsupported",
+          "question": "What is the accounting treatment for cryptocurrency staking rewards?",
+          "response": "The provided accounting knowledge does not contain enough information to answer this question.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 0.0,
+          "completeness_score": 0.5,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.0,
+          "retrieved_sources": [],
+          "generation_metadata": null
+        },
+        {
+          "id": "accounting_008",
+          "category": "unsupported",
+          "question": "How should a company account for a complex foreign currency derivative?",
+          "response": "The provided accounting knowledge does not contain enough information to answer this question.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 0.0,
+          "completeness_score": 0.5,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.0,
+          "retrieved_sources": [],
+          "generation_metadata": null
+        }
+      ]
+    }
+  ],
+  "release_recommendation": {
+    "decision": "RELEASE_CANDIDATE",
+    "recommended_model": "llama3.2:latest",
+    "reason": "Recommended based on evaluation pass rate, evaluator score, and latency."
+  },
+  "thresholds": {
+    "minimum_pass_rate": 0.8,
+    "minimum_evaluator_score": 0.75
+  }
+}

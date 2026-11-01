@@ -77,22 +77,56 @@ def classify_transaction(
     return None
 
 
-async def explain_accounting_concept(question: str) -> dict:
-    result = await ask_rag_assistant(question)
+
+async def explain_accounting_concept(
+    question: str,
+    model: str | None = None,
+    record_metrics: bool = True,
+    include_metadata: bool = False,
+    retrieved_chunks: list[dict] | None = None,
+) -> dict:
+    result_from_rag = await ask_rag_assistant(
+        question,
+        model=model,
+        record_metrics=record_metrics,
+        include_metadata=include_metadata,
+        retrieved_chunks=retrieved_chunks,
+    )
 
     accounting_result = AccountingResult(
-        response=result["response"],
-        sources=result["sources"],
+        response=result_from_rag["response"],
+        sources=result_from_rag["sources"],
         confidence=calculate_retrieval_confidence(
-            result["sources"]
+            result_from_rag["sources"]
         ),
     )
 
-    return accounting_result.model_dump()
+    result = accounting_result.model_dump()
+
+    if include_metadata and "generation_metadata" in result_from_rag:
+        result["generation_metadata"] = result_from_rag[
+            "generation_metadata"
+        ]
+
+    return result
 
 
-async def explain_transaction(transaction_description: str) -> dict:
-    result = await ask_rag_assistant(transaction_description)
+
+
+async def explain_transaction(
+    transaction_description: str,
+    model: str | None = None,
+    record_metrics: bool = True,
+    include_metadata: bool = False,
+    retrieved_chunks: list[dict] | None = None
+) -> dict:
+    result_from_rag = await ask_rag_assistant(
+        transaction_description,
+        model=model,
+        record_metrics=record_metrics,
+        include_metadata=include_metadata,
+        retrieved_chunks=retrieved_chunks
+    )
 
     amount = extract_amount(transaction_description)
 
@@ -101,13 +135,34 @@ async def explain_transaction(transaction_description: str) -> dict:
         amount,
     )
 
+    review_required = journal_entry is None
+
+    if amount <= 0:
+        review_reason = "Missing or invalid transaction amount."
+    elif journal_entry is None:
+        review_reason = (
+            "Transaction does not match a supported deterministic "
+            "accounting rule. Human review is required."
+        )
+    else:
+        review_reason = None
+
     accounting_result = AccountingResult(
-        response=result["response"],
+        response=result_from_rag["response"],
         journal_entry=journal_entry,
-        sources=result["sources"],
+        sources=result_from_rag["sources"],
         confidence=calculate_retrieval_confidence(
-            result["sources"]
+            result_from_rag["sources"]
         ),
+        review_required=review_required,
+        review_reason=review_reason,
     )
 
-    return accounting_result.model_dump()
+    result = accounting_result.model_dump()
+
+    if include_metadata and "generation_metadata" in result_from_rag:
+        result["generation_metadata"] = result_from_rag[
+            "generation_metadata"
+        ]
+
+    return result

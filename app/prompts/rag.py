@@ -56,8 +56,11 @@ Provide the accounting answer now:
 def build_rag_prompt(
     question: str,
     context: str,
+    prompt_template: str | None = None,
 ) -> str:
-    return RAG_ACCOUNTING_PROMPT.format(
+    template = prompt_template or RAG_ACCOUNTING_PROMPT
+
+    return template.format(
         question=question,
         context=context,
     )

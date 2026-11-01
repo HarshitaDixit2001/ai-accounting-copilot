@@ -1,0 +1,127 @@
+{
+  "timestamp": "2026-11-01T19:09:21.142569+00:00",
+  "dataset": "test_cases.json",
+  "total_cases": 1,
+  "models": [
+    {
+      "model": "llama3.2:latest",
+      "total_cases": 1,
+      "passed_cases": 1,
+      "failed_cases": 0,
+      "pass_rate": 1.0,
+      "average_keyword_score": 1.0,
+      "average_source_score": 1.0,
+      "average_grounding_score": 1.0,
+      "average_completeness_score": 1.0,
+      "average_evaluator_score": 1.0,
+      "average_latency_ms": 28791.94,
+      "latency_sample_count": 1,
+      "total_prompt_tokens": 1010,
+      "total_completion_tokens": 102,
+      "total_tokens": 1112,
+      "monetary_cost": null,
+      "cost_note": "Local Ollama monetary cost is not configured.",
+      "release_eligible": true,
+      "cases": [
+        {
+          "id": "accounting_001",
+          "category": "accounting_concept",
+          "question": "What is a journal entry?",
+          "response": "A journal entry is a record of a financial transaction in an accounting system. It is a basic entry that contains at least one debit account and one credit account. The total debit amount must equal the total credit amount. Every journal entry should be supported by the relevant transaction information.\n\nIn a journal entry, debit represents the left side of the account, and credit represents the right side of the account. Debits generally increase assets, equity, and expenses, while credits generally increase liabilities, equity, and revenue.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.783,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.783
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.536
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.504
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.475
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 0,
+              "similarity": 0.472
+            }
+          ],
+          "generation_metadata": {
+            "response": "A journal entry is a record of a financial transaction in an accounting system. It is a basic entry that contains at least one debit account and one credit account. The total debit amount must equal the total credit amount. Every journal entry should be supported by the relevant transaction information.\n\nIn a journal entry, debit represents the left side of the account, and credit represents the right side of the account. Debits generally increase assets, equity, and expenses, while credits generally increase liabilities, equity, and revenue.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1010,
+            "completion_tokens": 102,
+            "total_tokens": 1112,
+            "latency_ms": 28791.94,
+            "ollama_duration_ms": 28521.23
+          },
+          "evidence_fingerprint": "5eead825623d808d39ac1722b08ef90d87205a5e995d3ac30a6cf93e38655ee2"
+        }
+      ]
+    }
+  ],
+  "release_recommendation": {
+    "decision": "RELEASE_CANDIDATE",
+    "recommended_model": "llama3.2:latest",
+    "reason": "Recommended based on evaluation pass rate, evaluator score, and latency."
+  },
+  "thresholds": {
+    "minimum_pass_rate": 0.8,
+    "minimum_evaluator_score": 0.75
+  },
+  "dataset_fingerprint": "4d527dd7ec2589238b5e675e526c4e901532a3e4e74227c0e7e715eee39e5f6d",
+  "shared_evidence": {
+    "accounting_001": {
+      "fingerprint": "5eead825623d808d39ac1722b08ef90d87205a5e995d3ac30a6cf93e38655ee2",
+      "chunks": [
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 0,
+          "content": "Journal Entries\n\nA journal entry is a record of a financial transaction in an accounting system.\n\nA basic journal entry contains at least one debit account and one credit account.\nThe total debit amount must equal the total credit amount.\n\nDebit represents the left side of a journal entry.\nCredit represents the right side of a journal entry.\n\nCommon examples:\n\n1. Cash Expense\nWhen an expense is paid using cash:\nDebit: Expense Account\nCredit: Cash\n\nExample:\nA company pays \u20b95,000 for office suppli",
+          "similarity": 0.782922151732125
+        },
+        {
+          "source": "journal_entries.txt",
+          "chunk_id": 2,
+          "content": "\u20b915,000 in cash.\nDebit: Cash \u20b915,000\nCredit: Sales Revenue \u20b915,000\n\n4. Credit Sale\nWhen goods are sold on credit:\nDebit: Accounts Receivable\nCredit: Sales Revenue\n\nEvery journal entry should be supported by the relevant transaction information.",
+          "similarity": 0.5361218047459512
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 1,
+          "content": "s residual interest in the business after liabilities are deducted from assets.\n\nRevenue is income earned from normal business activities.\n\nExpenses are costs incurred to generate revenue.\n\nThe double-entry accounting system records the effect of each financial transaction in at least two accounts.\n\nFor a valid double-entry transaction:\n\nTotal Debits = Total Credits\n\nExamples of common account types:\n\nAssets:\nCash\nBank\nInventory\nAccounts Receivable\nEquipment\n\nLiabilities:\nAccounts Payable\nLoans",
+          "similarity": 0.5040585755653391
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 2,
+          "content": "le\nEquipment\n\nLiabilities:\nAccounts Payable\nLoans Payable\nOutstanding Expenses\n\nEquity:\nOwner's Capital\nRetained Earnings\n\nRevenue:\nSales Revenue\nService Revenue\n\nExpenses:\nRent Expense\nSalary Expense\nOffice Supplies Expense\nUtilities Expense\n\nDebit and Credit\n\nEvery accounting transaction affects at least two accounts using the double-entry accounting system.\n\nA debit is recorded on the left side of an account.\n\nA credit is recorded on the right side of an account.\n\nDebits generally increase as",
+          "similarity": 0.4753804868848648
+        },
+        {
+          "source": "accounting_basics.txt",
+          "chunk_id": 0,
+          "content": "Accounting Basics\n\nAccounting is the process of recording, classifying, summarizing, and interpreting financial transactions.\n\nThe accounting equation is:\n\nAssets = Liabilities + Equity\n\nAssets are resources controlled by a business.\nExamples include cash, inventory, equipment, and accounts receivable.\n\nLiabilities are obligations owed by a business.\nExamples include accounts payable, loans, and outstanding expenses.\n\nEquity represents the owner's residual interest in the business after liabilit",
+          "similarity": 0.4724336532588158
+        }
+      ]
+    }
+  }
+}

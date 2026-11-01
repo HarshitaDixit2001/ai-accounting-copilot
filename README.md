@@ -1,12 +1,12 @@
 # AI Accounting Copilot
 
-An end-to-end AI accounting assistant built with **Python, FastAPI, Retrieval-Augmented Generation (RAG), local LLM inference, deterministic accounting logic, automated evaluation, observability, auditability, data governance, and production-readiness controls**.
+An end-to-end AI accounting assistant built with **Python, FastAPI, Retrieval-Augmented Generation (RAG), local LLM inference, deterministic accounting logic, automated evaluation, observability, auditability, data governance, and production-oriented reliability controls.**
 
-The project demonstrates how to build an AI application beyond a basic LLM wrapper — from **API design and retrieval through evaluation, reliability, governance, monitoring, and production-oriented deployment**.
+The project demonstrates how to engineer an AI application beyond a basic LLM wrapper � from API design and retrieval through evaluation, reliability, governance, monitoring, and deployment preparation.
 
 ---
 
-## Overview
+# Overview
 
 AI Accounting Copilot helps users answer accounting questions and explain financial transactions using a domain-specific accounting knowledge base.
 
@@ -21,7 +21,7 @@ The system combines:
 - Deterministic accounting logic
 - Structured journal-entry generation
 - Automated AI evaluation
-- Quality gates
+- Configurable quality gates
 - Human feedback collection
 - Request-level observability
 - RAG performance metrics
@@ -31,12 +31,12 @@ The system combines:
 - Configurable audit retention
 - Health and readiness checks
 - Environment-based configuration
-- Production startup configuration
+- Production-style startup configuration
 - Docker deployment artifacts
 
-The architecture is designed around a simple principle:
+The architecture follows a simple principle:
 
-> **AI systems should be grounded, evaluated, observable, reliable, governable, and operationally ready — not just capable of generating text.**
+> AI systems should be grounded, evaluated, observable, reliable, governable, and operationally ready � not just capable of generating text.
 
 ---
 
@@ -59,98 +59,106 @@ The RAG pipeline:
 9. Generates a response using the local LLM.
 10. Returns the answer together with source information.
 
-This prevents the application from blindly generating accounting answers when the knowledge base does not provide sufficient evidence.
-
----
+This reduces unsupported accounting responses by requiring sufficient retrieved evidence before generating an answer.
 
 ## 2. Accounting Intelligence
 
-The accounting intelligence layer combines **generative AI with deterministic application logic**.
+The accounting intelligence layer combines **generative AI with deterministic application logic**. These responsibilities are kept separate.
 
-For supported transaction patterns, the system can produce structured accounting information such as:
+### Deterministic transaction classification
 
-```text
-Transaction:
-Rent paid in cash ₹25000
+The implemented `classify_transaction()` function applies explicit rules to supported transaction patterns.
 
-Journal Entry:
+Currently supported example:
 
-Debit:  Rent Expense   ₹25000
-Credit: Cash           ₹25000
-```
+- Transaction description contains both `rent` and `cash`.
+- Transaction amount must be greater than zero.
+- Debit: Rent Expense.
+- Credit: Cash.
 
-The application can:
+Unsupported transaction patterns do not receive an automatically generated journal entry from this classifier.
 
-- Explain accounting concepts
-- Explain financial transactions
-- Extract transaction amounts
-- Classify supported transaction patterns
-- Generate structured journal-entry information
-- Return retrieval sources
-- Return retrieval confidence
+### RAG and LLM functionality
 
-Deterministic logic is intentionally used where predictable accounting behavior is more appropriate than relying entirely on an LLM.
+The RAG pipeline retrieves relevant accounting knowledge and uses a local LLM to generate evidence-grounded explanations.
+
+It also:
+
+- Returns retrieved sources.
+- Calculates a retrieval confidence signal.
+- Abstains when sufficient evidence is unavailable.
+
+Retrieval confidence is based on source similarity. It is not a calibrated probability or a measure of accounting classification correctness.
+
+### Human-review safeguards
+
+The transaction explanation response includes:
+
+- `review_required`: indicates whether human review is required.
+- `review_reason`: explains why review is required.
+
+Current behavior:
+
+| Scenario | Review required |
+|---|---|
+| Supported Rent + Cash rule with valid amount | No |
+| Unsupported transaction pattern | Yes |
+| Missing or invalid amount | Yes |
+
+These flags identify transactions requiring human attention. They do not represent a completed approval workflow or guarantee that a supported classification is correct.
+
+Uncertain or unsupported accounting entries should be reviewed by a qualified human before final posting.
+
+Deterministic accounting logic is intentionally used where predictable behavior is more appropriate than relying entirely on an LLM.
 
 ---
 
 # Architecture
 
 ```text
-                         Client
-                           |
-                           v
-                    +-------------+
-                    |   FastAPI   |
-                    |     API     |
-                    +------+------+
-                           |
-             +-------------+-------------+
-             |             |             |
-             v             v             v
-        Request       Accounting      Health /
-        Logging      Intelligence    Readiness
-        & Metrics          |
-                            v
-                       RAG Service
-                            |
-                 +----------+----------+
-                 |                     |
-                 v                     v
-          RAG Retriever           Ollama LLM
-                 |                 qwen3:8b
-                 v
-          Knowledge Base
-                 |
-                 v
-       Local Embeddings
-       
-                 |
-                 v
-             SQLite
-             Database
+                    User / React Dashboard
+                              |
+                              v
+                       FastAPI Application
+                              |
+             +----------------+----------------+
+             |                |                |
+             v                v                v
+      Accounting          Request          Health /
+      Intelligence        Logging          Readiness
+             |            & Metrics
+       +-----+------+
+       |            |
+       v            v
+   RAG Service   Deterministic
+       |         Transaction
+       |         Classifier
+       |
+   +---+---+
+   |       |
+   v       v
+Retriever Ollama LLM
+   |      (qwen3:8b)
+   |
+   v
+Knowledge Base
+   |
+   v
+Local Embeddings
+   |
+   v
+SQLite / Retrieval Storage
+
+       Accounting Result
+              |
+       +------+------+
+       |      |      |
+       v      v      v
+    Response Sources Review
+                    Flags
 ```
 
-Cross-cutting capabilities operate across the application:
-
-```text
-Evaluation
-     |
-Feedback
-     |
-Observability
-     |
-Auditability
-     |
-Data Governance
-     |
-Security
-     |
-Reliability
-     |
-Configuration
-     |
-Production Readiness
-```
+Cross-cutting capabilities include evaluation, feedback collection, audit logging, data governance, and observability.
 
 ---
 
@@ -171,7 +179,7 @@ RAG Retrieval
      v
 Evidence Sufficiency Check
      |
-     +---- insufficient evidence ----> Safe Abstention
+     +---- Insufficient Evidence ----> Safe Abstention
      |
      v
 Grounded Prompt
@@ -184,7 +192,7 @@ Accounting Response
      |
      +----> Sources
      |
-     +----> Confidence
+     +----> Retrieval Confidence
      |
      +----> Evaluation
      |
@@ -229,7 +237,7 @@ If the retrieval layer cannot provide adequate supporting evidence, the system c
 The provided accounting knowledge does not contain enough information to answer this question.
 ```
 
-This creates an explicit **abstention path** instead of treating every question as answerable.
+This creates an explicit abstention path instead of treating every question as answerable.
 
 The abstention behavior is also included in the automated evaluation system.
 
@@ -249,7 +257,9 @@ The evaluation dataset covers:
 - Unsupported questions
 - Safe-abstention scenarios
 
-The evaluation measures:
+## Evaluation dimensions
+
+The evaluation pipeline measures:
 
 - Pass rate
 - Keyword coverage
@@ -259,51 +269,126 @@ The evaluation measures:
 - Evaluator score
 - Quality-gate status
 
-The application also contains a deterministic response evaluator that checks:
+The deterministic response evaluator checks:
 
 - Response presence
 - Source availability
 - Accounting terminology
 - Grounding in retrieved sources
 - Question relevance
-- Safe abstention behavior
+- Safe-abstention behavior
 - Unsupported-claim prevention
 
-The evaluator produces a score that can be tracked as an operational quality signal.
+The evaluator produces a heuristic quality score. It is an operational signal and does not independently establish factual or accounting correctness.
 
-### Latest evaluation result
+## Model comparison
+
+The project supports comparing multiple local LLMs against the same evaluation dataset.
+
+Run a comparison using:
+
+```powershell
+python -m evals.run_comparison
+```
+
+For a smaller smoke test:
+
+```powershell
+python -m evals.run_comparison --limit 1 --models llama3.2:latest
+```
+
+The comparison pipeline:
+
+1. Loads the accounting evaluation dataset.
+2. Retrieves shared evidence for evaluation cases.
+3. Uses the same retrieved evidence across the models being compared.
+4. Generates responses using the selected Ollama models.
+5. Evaluates each response.
+6. Captures generation metadata.
+7. Calculates aggregate model metrics.
+8. Applies configurable release-eligibility thresholds.
+9. Generates a JSON comparison report.
+
+## Model comparison metrics
+
+The comparison report records:
+
+- Pass rate
+- Average evaluator score
+- Keyword score
+- Source score
+- Grounding score
+- Completeness score
+- Average generation latency
+- Latency sample count
+- Prompt token count
+- Completion token count
+- Total token count
+- Monetary cost, when configured
+- Release eligibility
+
+## Evaluation traceability
+
+Each comparison report includes:
+
+- Evaluation dataset fingerprint
+- Shared evidence manifest
+- Evidence fingerprints
+- Retrieved source names
+- Retrieved chunk identifiers
+- Retrieval similarity scores
+- Model generation metadata
+- Evaluation results
+- Release thresholds
+- Release recommendation
+
+This makes it possible to trace which dataset and retrieved evidence were used during an evaluation.
+
+## Release eligibility
+
+The current comparison pipeline uses configured thresholds:
 
 ```text
-Pass Rate:    1.000
-Source Score: 1.000
-Quality Gate: Passed
+Minimum pass rate: 0.80
+Minimum evaluator score: 0.75
+All evaluation cases must pass
+All evaluator checks must pass
 ```
+
+A model that satisfies these checks can be marked as a release candidate.
+
+This is an evaluation-based eligibility signal, not an automatic production deployment approval.
+
+## Latest comparison smoke test
+
+```text
+Model: llama3.2:latest
+Evaluation cases: 1
+Passed cases: 1
+Pass rate: 100%
+Evaluator score: 1.00
+Average latency: 37.39 seconds
+Total tokens: 1,127
+Release eligible: True
+```
+
+The report was generated successfully.
+
+This result validates the comparison workflow for one test case. It should not be interpreted as full-dataset validation or proof of production readiness.
+
+## Cost measurement
+
+The comparison pipeline captures token usage and supports monetary cost reporting.
+
+For local Ollama inference, monetary cost is currently reported as unavailable because local inference pricing is not configured.
+
+## Evaluation limitations
+
+The evaluator is deterministic and heuristic-based. It checks configured response properties but does not guarantee accounting correctness.
+
+The release recommendation depends on the evaluation dataset, evidence, thresholds, and sample size. Larger evaluation runs are necessary before making meaningful model-release decisions.
 
 The evaluation system provides a repeatable mechanism for detecting regressions when retrieval, prompts, accounting logic, or model behavior change.
-
----
-
-# Human Feedback
-
-The application supports collecting user feedback on AI responses.
-
-Feedback includes:
-
-- Request ID
-- Rating
-- Optional written feedback
-- Timestamp
-
-Supported feedback metrics include:
-
-```text
-Total Feedback
-Positive Feedback
-Negative Feedback
-Positive Feedback Rate
-```
-
-This creates a feedback loop between AI behavior and real user judgment.
 
 ---
 
@@ -389,6 +474,8 @@ Audit records are stored in SQLite and can be retrieved through a protected audi
 
 The audit layer provides traceability for understanding what the system received, what it generated, what evidence was used, and how the response was evaluated.
 
+Supported AI requests can be recorded; this does not imply that every request is necessarily persisted.
+
 ---
 
 # Data Governance
@@ -402,7 +489,7 @@ Implemented controls include:
 - Indian phone-number redaction before audit storage
 - Configurable audit retention
 - Controlled access to operational AI records
-- Environment-based secrets/configuration
+- Environment-based secrets and configuration
 
 Example:
 
@@ -435,6 +522,8 @@ The application includes:
 - Configurable metrics exposure
 - Sensitive-data redaction
 - Separation of `.env` and `.env.example`
+
+The audit API key protects audit-log access; it does not mean every application endpoint is authenticated.
 
 The project does not claim to be a complete enterprise security platform. These controls represent the security and governance foundation implemented in the current application.
 
@@ -527,7 +616,8 @@ Audit-log access requires the configured audit API key.
 | Testing | pytest |
 | Server | Uvicorn |
 | Configuration | python-dotenv / environment variables |
-| Deployment | Docker artifacts + production startup script |
+| Frontend | React, TypeScript, Vite |
+| Deployment | Docker artifacts and production startup script |
 
 The system is **local-first** and does not require a paid hosted LLM API.
 
@@ -545,7 +635,7 @@ This provides:
 - Reproducible AI experimentation
 - Greater control over application data flow
 
-Current model:
+Current language model:
 
 ```text
 qwen3:8b
@@ -557,6 +647,12 @@ Embedding model:
 nomic-embed-text
 ```
 
+An alternative local model used for comparison is:
+
+```text
+llama3.2:latest
+```
+
 This architecture makes the project suitable for development and demonstration without requiring a commercial model API key.
 
 ---
@@ -565,59 +661,128 @@ This architecture makes the project suitable for development and demonstration w
 
 ```text
 ai-accounting-copilot/
-│
-├── app/
-│   ├── api/
-│   │   └── routes/
-│   ├── core/
-│   ├── db/
-│   ├── models/
-│   ├── prompts/
-│   ├── rag/
-│   └── services/
-│
-├── data/
-├── knowledge_base/
-├── evals/
-├── tests/
-├── agents/
-├── tools/
-├── docs/
-│
-├── Dockerfile
-├── .dockerignore
-├── .env.example
-├── start_production.ps1
-├── requirements.txt
-└── README.md
+|
++-- app/
+|   +-- api/
+|   |   +-- routes/
+|   +-- core/
+|   +-- db/
+|   +-- models/
+|   +-- prompts/
+|   +-- rag/
+|   +-- repositories/
+|   +-- schemas/
+|   +-- services/
+|
++-- frontend/
+|   +-- src/
+|   +-- package.json
+|
++-- api/
++-- rag/
++-- services/
++-- agents/
++-- tools/
++-- data/
++-- knowledge_base/
+|
++-- evals/
+|   +-- results/
+|   +-- run_comparison.py
+|
++-- tests/
++-- docs/
+|   +-- ACCOUNTING_WORKFLOW.md
+|   +-- architecture.md
+|   +-- evaluation.md
+|
++-- Dockerfile
++-- .dockerignore
++-- .env.example
++-- .gitignore
++-- requirements.txt
++-- start_production.ps1
++-- test_retrieval.py
++-- README.md
 ```
 
 ---
 
 # Running Locally
 
-## 1. Activate the virtual environment
+## 1. Clone the repository
 
 ```powershell
+git clone <your-repository-url>
+cd ai-accounting-copilot
+```
+
+## 2. Create and activate a virtual environment
+
+```powershell
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-## 2. Make sure Ollama is running
+## 3. Install backend dependencies
 
-Verify that the required models are available:
+```powershell
+pip install -r requirements.txt
+```
+
+## 4. Configure environment variables
+
+Copy the example configuration:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Generate a secure audit API key:
+
+```powershell
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+Place the generated key in your local `.env` file:
+
+```text
+AUDIT_API_KEY=your-generated-secret
+```
+
+Never commit the actual `.env` file or expose its contents.
+
+## 5. Install and verify Ollama models
+
+Make sure [Ollama](https://ollama.com/) is installed and running.
+
+Pull the required models:
+
+```powershell
+ollama pull qwen3:8b
+ollama pull nomic-embed-text
+```
+
+Verify that both models are available:
 
 ```powershell
 ollama list
 ```
 
-The project expects:
+Required models:
 
-```text
-qwen3:8b
-nomic-embed-text
+- `qwen3:8b` � local language model for accounting responses.
+- `nomic-embed-text` � embedding model for knowledge retrieval.
+
+The optional alternative language model used for model comparison is:
+
+```powershell
+ollama pull llama3.2:latest
 ```
 
-## 3. Start the FastAPI application
+## 6. Start the FastAPI application
+
+From the project root:
 
 ```powershell
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
@@ -656,7 +821,7 @@ Open a second PowerShell terminal while the FastAPI backend is running.
 ### 1. Navigate to the frontend directory
 
 ```powershell
-cd "D:\AI Projects\ai-accounting-copilot\frontend"
+cd frontend
 ```
 
 ### 2. Install dependencies
@@ -667,7 +832,7 @@ npm install
 
 ### 3. Configure the API URL
 
-Create a `.env` file inside the `frontend` directory with the following setting:
+Create a `.env` file inside the `frontend` directory with:
 
 ```text
 VITE_API_BASE_URL=http://127.0.0.1:8000
@@ -693,7 +858,9 @@ To verify that the frontend compiles for production:
 npm run build
 ```
 
-The generated production assets are written to `frontend/dist/`. This generated directory is excluded from version control.
+The generated production assets are written to `frontend/dist/`. This generated directory should not be committed to version control.
+
+---
 
 # Production-Style Local Startup
 
@@ -721,7 +888,11 @@ and starts Uvicorn on:
 0.0.0.0:8000
 ```
 
+Binding to `0.0.0.0` exposes the server on available network interfaces. Use appropriate network restrictions when network access is not intended.
+
 Docker is not required for the current local development environment. Docker artifacts are included to provide deployment portability.
+
+**Security note:** This script provides a production-style local startup configuration, not a complete production deployment. An actual deployment also requires appropriate network restrictions, authentication, HTTPS, and secret management.
 
 ---
 
@@ -741,13 +912,21 @@ OLLAMA_MODEL=qwen3:8b
 RAG_SIMILARITY_THRESHOLD=0.45
 EXPOSE_METRICS=false
 MAX_PROMPT_LENGTH=5000
-AUDIT_API_KEY=change-this-to-a-strong-random-key
+AUDIT_API_KEY=your-generated-secret
 AUDIT_RETENTION_DAYS=90
 ```
 
 Secrets and environment-specific configuration should not be committed to source control.
 
-The repository provides `.env.example` as a configuration template.
+The repository provides `.env.example` as a configuration template. Use a placeholder for `AUDIT_API_KEY` in that file, never a real credential.
+
+## Security and Operational Configuration
+
+- `AUDIT_API_KEY` protects audit API access through the `X-Audit-API-Key` request header. If the key is not configured, audit access is disabled.
+- `AUDIT_RETENTION_DAYS` controls the audit retention period. The default is 90 days.
+- `EXPOSE_METRICS` controls whether metrics endpoints are accessible. The application configuration defaults this setting to `true` when the variable is absent; the example configuration explicitly sets it to `false`.
+
+Keep API keys and other secrets in the local `.env` file. Never commit real credentials to version control.
 
 ---
 
@@ -755,7 +934,7 @@ The repository provides `.env.example` as a configuration template.
 
 The project exposes multiple layers of system signals.
 
-### Technical signals
+## Technical signals
 
 ```text
 Request count
@@ -766,7 +945,7 @@ LLM generation latency
 RAG abstentions
 ```
 
-### AI quality signals
+## AI quality signals
 
 ```text
 Evaluator score
@@ -776,7 +955,7 @@ Grounding
 Completeness
 ```
 
-### Human feedback signals
+## Human feedback signals
 
 ```text
 Positive feedback
@@ -784,7 +963,7 @@ Negative feedback
 Positive feedback rate
 ```
 
-### Business signals
+## Business signals
 
 ```text
 Accounting questions answered
@@ -802,7 +981,7 @@ This provides a foundation for evaluating the application across more than model
 Run the complete test suite:
 
 ```powershell
-pytest
+python -m pytest -q
 ```
 
 The test suite covers:
@@ -829,28 +1008,32 @@ The test suite covers:
 - Audit retention
 - Health and readiness
 
-### Latest full regression
+## Latest full regression
 
 ```text
-102 passed, 0 failed
+118 passed, 0 failed
 ```
 
-The current suite contains **102 automated tests**.
+The current suite contains **118 automated tests**.
+
+The automated test suite validates application behavior using controlled test cases. Runtime health and readiness checks are documented separately under Production Validation.
 
 ---
 
 # Production Validation
 
-The production-oriented configuration has been smoke-tested.
+The application has been smoke-tested using its production-oriented local startup configuration.
 
-Verified:
+The following checks were verified:
+
+## API Health
 
 ```text
 GET /health
 200 OK
 ```
 
-and:
+## Application Readiness
 
 ```text
 GET /ready
@@ -860,19 +1043,23 @@ database: available
 ollama: available
 ```
 
-The RAG workflow was also tested using:
+## RAG Workflow
+
+The accounting RAG endpoint was tested using:
 
 ```text
 POST /accounting/rag
 ```
 
-with:
+Test query:
 
 ```text
 How do I record rent paid in cash?
 ```
 
-The application successfully returned a grounded accounting response through the production startup configuration.
+The application successfully returned a grounded accounting response through the production-oriented startup configuration.
+
+These checks demonstrate local application functionality and service readiness. They do not represent a complete production deployment or external infrastructure validation.
 
 ---
 
@@ -906,9 +1093,11 @@ Request-level and RAG-level metrics make latency, slow requests, and abstentions
 
 User feedback is captured as an additional quality signal rather than relying exclusively on automated evaluation.
 
+Feedback collection provides a quality signal; it does not currently implement a formal reviewer approval or rejection workflow.
+
 ## Auditability
 
-AI requests can be recorded with their sources and evaluator scores, creating traceability for AI behavior.
+Supported AI requests can be recorded with source references and evaluation metadata, providing traceability for recorded AI behavior.
 
 ## Data Governance
 
@@ -928,7 +1117,7 @@ The system includes health checks, readiness checks, structured logging, metrics
 
 The project intentionally goes beyond a basic RAG demo and implements several capabilities relevant to production AI systems.
 
-### Evaluation
+## Evaluation
 
 - Representative evaluation dataset
 - Automated evaluator
@@ -937,13 +1126,13 @@ The project intentionally goes beyond a basic RAG demo and implements several ca
 - Safe-abstention evaluation
 - Evaluator score tracking
 
-### Human Feedback
+## Human Feedback
 
 - User feedback collection
 - Positive/negative feedback tracking
 - Feedback rate metrics
 
-### Auditability
+## Auditability
 
 - AI audit records
 - Request correlation
@@ -951,14 +1140,14 @@ The project intentionally goes beyond a basic RAG demo and implements several ca
 - Evaluator-score tracking
 - Protected audit API
 
-### Data Governance
+## Data Governance
 
 - Sensitive-data redaction
 - Audit retention policy
 - API-key-protected audit access
 - Environment-based configuration
 
-### Reliability
+## Reliability
 
 - Health checks
 - Readiness checks
@@ -966,7 +1155,7 @@ The project intentionally goes beyond a basic RAG demo and implements several ca
 - Safe abstention
 - Automated regression testing
 
-### Observability
+## Observability
 
 - Request metrics
 - Latency metrics
@@ -975,7 +1164,7 @@ The project intentionally goes beyond a basic RAG demo and implements several ca
 - Slow-request tracking
 - Abstention tracking
 
-### Business Measurement
+## Business Measurement
 
 - Accounting questions answered
 - Accounting questions abstained
@@ -997,10 +1186,11 @@ Current limitations include:
 - Retrieval confidence is based on similarity signals and is not a calibrated probability.
 - The evaluator is deterministic and heuristic-based rather than a full LLM-as-a-judge system.
 - Deterministic transaction classification currently covers a limited set of supported patterns.
+- Human-review flags are implemented, but a complete reviewer assignment and approval workflow is not.
 - The current deployment artifacts are production-oriented but have not been validated as a multi-node production deployment.
 - The project does not claim real enterprise customer adoption or production traffic.
 
-These limitations are intentional and documented so that future production evolution can be evaluated explicitly.
+These limitations are documented so that future production evolution can be evaluated explicitly.
 
 ---
 
@@ -1010,31 +1200,38 @@ A larger production deployment could evolve toward:
 
 ```text
 SQLite
-   ↓
+   |
+   v
 PostgreSQL
 
 Local Retrieval
-   ↓
+   |
+   v
 Managed / Distributed Vector Infrastructure
 
 Single Application
-   ↓
+   |
+   v
 Scalable Service Architecture
 
 Local Ollama
-   ↓
+   |
+   v
 Managed Model Serving / Model Gateway
 
 Basic Metrics
-   ↓
+   |
+   v
 Centralized Observability Platform
 
 Single-Tenant Application
-   ↓
+   |
+   v
 Multi-Tenant Isolation
 
 Local Audit Storage
-   ↓
+   |
+   v
 Enterprise Audit / Compliance Infrastructure
 ```
 
@@ -1044,7 +1241,7 @@ Additional production evolution could include:
 - Centralized logging
 - Advanced model evaluation
 - LLM-as-a-judge evaluation
-- Human review workflows
+- Human approval workflows and reviewer assignment
 - Multi-tenant authorization
 - Role-based access control
 - Rate limiting
@@ -1063,27 +1260,29 @@ Additional production evolution could include:
 
 | Area | Status |
 |---|---|
-| Foundation | Complete |
-| Accounting Core | Complete |
-| Local LLM Integration | Complete |
-| RAG | Complete |
-| Accounting Intelligence | Complete |
-| AI Evaluation | Complete |
-| Human Feedback | Complete |
-| Reliability & Observability | Complete |
-| Auditability | Complete |
-| Data Governance | Complete |
-| Business Metrics | Complete |
-| Security Controls | Complete |
-| Productionization | Complete |
-| Automated Testing | Complete |
+| Foundation | Implemented |
+| Accounting Core | Implemented |
+| Local LLM Integration | Implemented |
+| RAG | Implemented |
+| Accounting Intelligence | Implemented |
+| AI Evaluation | Implemented |
+| Human Feedback | Implemented |
+| Reliability & Observability | Implemented |
+| Auditability | Implemented |
+| Data Governance | Implemented |
+| Business Metrics | Implemented |
+| Security Controls | Implemented |
+| Production-Oriented Local Configuration | Implemented |
+| Automated Testing | 118 tests passing |
 
-### Current regression status
+## Current regression status
 
 ```text
-102 passed
+118 passed
 0 failed
 ```
+
+These statuses describe the implemented portfolio scope, not a certification of enterprise production readiness.
 
 ---
 
@@ -1120,21 +1319,29 @@ The project demonstrates an engineering workflow of:
 
 ```text
 Prototype
-   ↓
+   |
+   v
 Build
-   ↓
+   |
+   v
 Ground
-   ↓
+   |
+   v
 Evaluate
-   ↓
+   |
+   v
 Measure
-   ↓
+   |
+   v
 Add Feedback
-   ↓
+   |
+   v
 Add Reliability
-   ↓
+   |
+   v
 Add Governance
-   ↓
+   |
+   v
 Prepare for Production
 ```
 
@@ -1142,25 +1349,25 @@ Prepare for Production
 
 # Portfolio Context
 
-AI Accounting Copilot was built as an engineering demonstration of how an AI system can be developed from an initial prototype into a **measurable, observable, grounded, and production-oriented application**.
+AI Accounting Copilot was built as an engineering demonstration of how an AI system can be developed from an initial prototype into a measurable, observable, grounded, and production-oriented application.
 
 The emphasis is not only on generating useful AI responses, but also on:
 
 ```text
 Model Behavior
-+
+      +
 Retrieval Quality
-+
+      +
 Evaluation
-+
+      +
 Reliability
-+
+      +
 Observability
-+
+      +
 Security
-+
+      +
 Governance
-+
+      +
 Business Outcomes
 ```
 
@@ -1171,3 +1378,17 @@ This makes the project representative of the broader engineering lifecycle invol
 # License
 
 This project is intended as a portfolio and engineering demonstration project.
+
+## Application Screenshots
+
+### Overview Dashboard
+![Overview Dashboard](docs/screenshots/Overview_Dashboard.png)
+
+### Accounting Assistant
+![Accounting Assistant](docs/screenshots/Accounting_Assisstant.png)
+
+### Transaction Management
+![Transaction Management](docs/screenshots/Transaction.png)
+
+### Evaluation and Monitoring
+![Evaluation and Monitoring](docs/screenshots/Evaluation_Monitoring.png)

@@ -1,10 +1,14 @@
+
 import logging
 import time
 
 from app.core.metrics import record_rag_request
 from app.prompts.rag import build_rag_prompt
 from app.rag.retriever import retrieve_relevant_chunks
-from app.services.ollama_service import generate_response
+from app.services.ollama_service import (
+    generate_response,
+    generate_response_with_metadata,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -76,15 +80,22 @@ def has_sufficient_evidence(
 
 async def ask_rag_assistant(
     question: str,
+    record_metrics: bool = True,
+    model: str | None = None,
+    include_metadata: bool = False,
+    retrieved_chunks: list[dict] | None = None,
 ) -> dict:
     pipeline_start = time.perf_counter()
 
     retrieval_start = time.perf_counter()
 
-    relevant_chunks = await retrieve_relevant_chunks(
-        question,
-        top_k=5,
-    )
+    if retrieved_chunks is None:
+        relevant_chunks = await retrieve_relevant_chunks(
+            question,
+            top_k=5,
+        )
+    else:
+        relevant_chunks = retrieved_chunks
 
     retrieval_duration_ms = (
         time.perf_counter() - retrieval_start
@@ -96,6 +107,7 @@ async def ask_rag_assistant(
         len(relevant_chunks),
     )
 
+    # Abstain when retrieved evidence is insufficient.
     if not has_sufficient_evidence(
         question,
         relevant_chunks,
@@ -104,11 +116,12 @@ async def ask_rag_assistant(
             time.perf_counter() - pipeline_start
         ) * 1000
 
-        record_rag_request(
-            retrieval_duration_ms=retrieval_duration_ms,
-            llm_duration_ms=0.0,
-            abstained=True,
-        )
+        if record_metrics:
+            record_rag_request(
+                retrieval_duration_ms=retrieval_duration_ms,
+                llm_duration_ms=0.0,
+                abstained=True,
+            )
 
         logger.info(
             "RAG pipeline abstained | duration_ms=%.2f | "
@@ -119,13 +132,14 @@ async def ask_rag_assistant(
 
         return {
             "response": (
-                "The provided accounting knowledge "
-                "does not contain enough information "
-                "to answer this question."
+                "The provided accounting knowledge does not contain enough information to answer this question."
             ),
             "sources": [],
+            "confidence": 0.0,
+            "abstained": True,
         }
 
+    # Build context from retrieved evidence.
     context = "\n\n".join(
         (
             f"Source: {chunk['source']}\n"
@@ -140,9 +154,21 @@ async def ask_rag_assistant(
         context=context,
     )
 
+        # Generate the response.
     llm_start = time.perf_counter()
+    generation_metadata = None
 
-    response = await generate_response(prompt)
+    if include_metadata:
+        generation_metadata = await generate_response_with_metadata(
+            prompt,
+            model=model,
+        )
+        response = generation_metadata["response"]
+    else:
+        response = await generate_response(
+            prompt,
+            model=model,
+        )
 
     llm_duration_ms = (
         time.perf_counter() - llm_start
@@ -152,13 +178,14 @@ async def ask_rag_assistant(
         "RAG pipeline LLM generation | duration_ms=%.2f",
         llm_duration_ms,
     )
+    if record_metrics:
+        record_rag_request(
+            retrieval_duration_ms=retrieval_duration_ms,
+            llm_duration_ms=llm_duration_ms,
+            abstained=False,
+        )
 
-    record_rag_request(
-        retrieval_duration_ms=retrieval_duration_ms,
-        llm_duration_ms=llm_duration_ms,
-        abstained=False,
-    )
-
+    # Prepare source metadata.
     sources = [
         {
             "source": chunk["source"],
@@ -179,7 +206,12 @@ async def ask_rag_assistant(
         len(sources),
     )
 
-    return {
+    result = {
         "response": response,
         "sources": sources,
     }
+
+    if include_metadata:
+        result["generation_metadata"] = generation_metadata
+
+    return result

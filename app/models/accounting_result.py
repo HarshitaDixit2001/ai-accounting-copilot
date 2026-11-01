@@ -1,3 +1,4 @@
+
 from pydantic import BaseModel
 from typing import Optional
 
@@ -18,3 +19,5 @@ class AccountingResult(BaseModel):
     journal_entry: Optional[JournalEntry] = None
     sources: list[dict]
     confidence: float
+    review_required: bool = False
+    review_reason: Optional[str] = None

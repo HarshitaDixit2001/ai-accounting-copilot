@@ -126,29 +126,62 @@ def test_rag_full_integration():
         assert isinstance(source["chunk_id"], int)
         assert 0.0 <= source["similarity"] <= 1.0
 
-def test_rag_full_integration():
-    response = client.post(
-        "/accounting/rag",
-        json={
-            "prompt": "How do I record rent paid in cash?"
-        },
-    )
+@pytest.mark.asyncio
+async def test_rag_service_skips_metrics_for_successful_response():
+    fake_chunks = [
+        {
+            "source": "journal_entries.txt",
+            "chunk_id": 0,
+            "content": "A journal entry records a financial transaction.",
+            "similarity": 0.85,
+        }
+    ]
 
-    assert response.status_code == 200
+    with patch(
+        "app.services.rag_service.retrieve_relevant_chunks",
+        new_callable=AsyncMock,
+        return_value=fake_chunks,
+    ), patch(
+        "app.services.rag_service.generate_response",
+        new_callable=AsyncMock,
+        return_value="A journal entry records a financial transaction.",
+    ), patch(
+        "app.services.rag_service.record_rag_request"
+    ) as mock_metrics:
 
-    data = response.json()
+        from app.services.rag_service import ask_rag_assistant
 
-    assert "response" in data
-    assert data["response"]
+        response = await ask_rag_assistant(
+            "What is a journal entry?",
+            record_metrics=False,
+        )
 
-    assert "sources" in data
-    assert data["sources"]
+    assert response["response"]
+    assert response["sources"]
 
-    for source in data["sources"]:
-        assert "source" in source
-        assert "chunk_id" in source
-        assert "similarity" in source
+    mock_metrics.assert_not_called()
 
-        assert source["source"]
-        assert isinstance(source["chunk_id"], int)
-        assert 0.0 <= source["similarity"] <= 1.0
+@pytest.mark.asyncio
+async def test_rag_service_skips_metrics_for_abstention():
+    with patch(
+        "app.services.rag_service.retrieve_relevant_chunks",
+        new_callable=AsyncMock,
+        return_value=[],
+    ), patch(
+        "app.services.rag_service.generate_response",
+        new_callable=AsyncMock,
+    ), patch(
+        "app.services.rag_service.record_rag_request"
+    ) as mock_metrics:
+
+        from app.services.rag_service import ask_rag_assistant
+
+        response = await ask_rag_assistant(
+            "What is the capital of France?",
+            record_metrics=False,
+        )
+
+    assert response["sources"] == []
+    assert response["abstained"] is True
+
+    mock_metrics.assert_not_called()

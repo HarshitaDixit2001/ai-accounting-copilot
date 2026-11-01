@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-11-01T16:34:49.006080+00:00",
+  "dataset": "test_cases.json",
+  "total_cases": 2,
+  "models": [
+    {
+      "model": "qwen3:8b",
+      "total_cases": 2,
+      "passed_cases": 2,
+      "failed_cases": 0,
+      "pass_rate": 1.0,
+      "average_keyword_score": 0.834,
+      "average_source_score": 1.0,
+      "average_grounding_score": 1.0,
+      "average_completeness_score": 1.0,
+      "average_evaluator_score": 1.0,
+      "average_latency_ms": 73317.7,
+      "latency_sample_count": 2,
+      "total_prompt_tokens": 2143,
+      "total_completion_tokens": 226,
+      "total_tokens": 2369,
+      "monetary_cost": null,
+      "cost_note": "Local Ollama monetary cost is not configured.",
+      "release_eligible": true,
+      "cases": [
+        {
+          "id": "accounting_001",
+          "category": "accounting_concept",
+          "question": "What is a journal entry?",
+          "response": "A **journal entry** is a record of a financial transaction in an accounting system. It follows the **double-entry accounting system**, which means every transaction affects at least two accounts. In a journal entry, **debits** (recorded on the left side) and **credits** (recorded on the right side) are used to ensure that the total debit amount equals the total credit amount. This system maintains the balance of the accounting equation: **Assets = Liabilities + Equity**. Journal entries are essential for accurately tracking financial activities and ensuring proper financial reporting.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.783,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.783
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.536
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.504
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.475
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 0,
+              "similarity": 0.472
+            }
+          ],
+          "generation_metadata": {
+            "response": "A **journal entry** is a record of a financial transaction in an accounting system. It follows the **double-entry accounting system**, which means every transaction affects at least two accounts. In a journal entry, **debits** (recorded on the left side) and **credits** (recorded on the right side) are used to ensure that the total debit amount equals the total credit amount. This system maintains the balance of the accounting equation: **Assets = Liabilities + Equity**. Journal entries are essential for accurately tracking financial activities and ensuring proper financial reporting.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 1021,
+            "completion_tokens": 115,
+            "total_tokens": 1136,
+            "latency_ms": 90490.69,
+            "ollama_duration_ms": 90197.9
+          }
+        },
+        {
+          "id": "accounting_002",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b925000",
+          "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the company's cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b925,000  \n- Credit: Cash \u20b925,000  \n\n**Explanation**  \nThe Rent Expense account is debited because the company incurred an expense by paying rent. The Cash account is credited because the company's cash balance has decreased. This entry accurately reflects the payment of rent and its impact on the financial statements.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.553
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.532
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.489
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.465
+            }
+          ],
+          "generation_metadata": {
+            "response": "**Accounting Treatment**  \nWhen rent is paid in cash, it is recorded as an expense, reducing the company's cash balance.  \n\n**Journal Entry**  \n- Debit: Rent Expense \u20b925,000  \n- Credit: Cash \u20b925,000  \n\n**Explanation**  \nThe Rent Expense account is debited because the company incurred an expense by paying rent. The Cash account is credited because the company's cash balance has decreased. This entry accurately reflects the payment of rent and its impact on the financial statements.",
+            "model": "qwen3:8b",
+            "prompt_tokens": 1122,
+            "completion_tokens": 111,
+            "total_tokens": 1233,
+            "latency_ms": 56144.7,
+            "ollama_duration_ms": 55850.9
+          }
+        }
+      ]
+    },
+    {
+      "model": "llama3.2:latest",
+      "total_cases": 2,
+      "passed_cases": 2,
+      "failed_cases": 0,
+      "pass_rate": 1.0,
+      "average_keyword_score": 0.834,
+      "average_source_score": 1.0,
+      "average_grounding_score": 0.85,
+      "average_completeness_score": 1.0,
+      "average_evaluator_score": 1.0,
+      "average_latency_ms": 26851.05,
+      "latency_sample_count": 2,
+      "total_prompt_tokens": 2097,
+      "total_completion_tokens": 158,
+      "total_tokens": 2255,
+      "monetary_cost": null,
+      "cost_note": "Local Ollama monetary cost is not configured.",
+      "release_eligible": true,
+      "cases": [
+        {
+          "id": "accounting_001",
+          "category": "accounting_concept",
+          "question": "What is a journal entry?",
+          "response": "A journal entry is a record of a financial transaction in an accounting system. It contains at least one debit account and one credit account, with the total debit amount equaling the total credit amount. The journal entry represents the left side of the accounting equation, with debit accounts increasing and credit accounts decreasing.",
+          "keyword_score": 1.0,
+          "source_score": 1.0,
+          "grounding_score": 1.0,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.783,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.783
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.536
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 1,
+              "similarity": 0.504
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 2,
+              "similarity": 0.475
+            },
+            {
+              "source": "accounting_basics.txt",
+              "chunk_id": 0,
+              "similarity": 0.472
+            }
+          ],
+          "generation_metadata": {
+            "response": "A journal entry is a record of a financial transaction in an accounting system. It contains at least one debit account and one credit account, with the total debit amount equaling the total credit amount. The journal entry represents the left side of the accounting equation, with debit accounts increasing and credit accounts decreasing.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1010,
+            "completion_tokens": 61,
+            "total_tokens": 1071,
+            "latency_ms": 31356.42,
+            "ollama_duration_ms": 31071.07
+          }
+        },
+        {
+          "id": "accounting_002",
+          "category": "transaction",
+          "question": "Rent paid in cash \u20b925000",
+          "response": "What is the accounting treatment for rent paid in cash?\n\nThe accounting treatment for rent paid in cash is to debit Rent Expense and credit Cash.\n\nDebit: Rent Expense \u20b925,000\nCredit: Cash \u20b925,000\n\nThis is because the rent paid is an expense, and it is paid using cash. By debiting Rent Expense, we are increasing the expense account, and by crediting Cash, we are decreasing the cash account, which reflects the cash outflow.",
+          "keyword_score": 0.667,
+          "source_score": 1.0,
+          "grounding_score": 0.7,
+          "completeness_score": 1.0,
+          "evaluator_score": 1.0,
+          "evaluator_passed": true,
+          "passed": true,
+          "confidence": 0.618,
+          "retrieved_sources": [
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 2,
+              "similarity": 0.618
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 1,
+              "similarity": 0.553
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 0,
+              "similarity": 0.532
+            },
+            {
+              "source": "journal_entries.txt",
+              "chunk_id": 0,
+              "similarity": 0.489
+            },
+            {
+              "source": "financial_transactions.txt",
+              "chunk_id": 1,
+              "similarity": 0.465
+            }
+          ],
+          "generation_metadata": {
+            "response": "What is the accounting treatment for rent paid in cash?\n\nThe accounting treatment for rent paid in cash is to debit Rent Expense and credit Cash.\n\nDebit: Rent Expense \u20b925,000\nCredit: Cash \u20b925,000\n\nThis is because the rent paid is an expense, and it is paid using cash. By debiting Rent Expense, we are increasing the expense account, and by crediting Cash, we are decreasing the cash account, which reflects the cash outflow.",
+            "model": "llama3.2:latest",
+            "prompt_tokens": 1087,
+            "completion_tokens": 97,
+            "total_tokens": 1184,
+            "latency_ms": 22345.68,
+            "ollama_duration_ms": 22060.97
+          }
+        }
+      ]
+    }
+  ],
+  "release_recommendation": {
+    "decision": "RELEASE_CANDIDATE",
+    "recommended_model": "llama3.2:latest",
+    "reason": "Recommended based on evaluation pass rate, evaluator score, and latency."
+  },
+  "thresholds": {
+    "minimum_pass_rate": 0.8,
+    "minimum_evaluator_score": 0.75
+  }
+}

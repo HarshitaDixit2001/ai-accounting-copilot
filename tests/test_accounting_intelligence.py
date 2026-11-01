@@ -13,6 +13,10 @@ from app.services.accounting_intelligence import (
     extract_amount,
 )
 
+import pytest
+
+from app.services.accounting_intelligence import explain_transaction
+
 @pytest.mark.asyncio
 async def test_explain_accounting_concept():
     with patch(
@@ -255,3 +259,71 @@ def test_classify_unsupported_transaction_returns_none():
     )
 
     assert journal_entry is None
+
+@pytest.mark.asyncio
+async def test_supported_transaction_does_not_require_review(monkeypatch):
+    async def mock_rag(*args, **kwargs):
+        return {
+            "response": "Rent payment recorded.",
+            "sources": [{"similarity": 0.9}],
+        }
+
+    monkeypatch.setattr(
+        "app.services.accounting_intelligence.ask_rag_assistant",
+        mock_rag,
+    )
+
+    result = await explain_transaction(
+        "Paid rent in cash Rs. 25000",
+        record_metrics=False,
+    )
+
+    assert result["journal_entry"] is not None
+    assert result["review_required"] is False
+    assert result["review_reason"] is None
+
+
+@pytest.mark.asyncio
+async def test_unsupported_transaction_requires_review(monkeypatch):
+    async def mock_rag(*args, **kwargs):
+        return {
+            "response": "Transaction explanation.",
+            "sources": [{"similarity": 0.9}],
+        }
+
+    monkeypatch.setattr(
+        "app.services.accounting_intelligence.ask_rag_assistant",
+        mock_rag,
+    )
+
+    result = await explain_transaction(
+        "Purchased office furniture for Rs. 15000",
+        record_metrics=False,
+    )
+
+    assert result["journal_entry"] is None
+    assert result["review_required"] is True
+    assert "supported deterministic" in result["review_reason"]
+
+
+@pytest.mark.asyncio
+async def test_missing_amount_requires_review(monkeypatch):
+    async def mock_rag(*args, **kwargs):
+        return {
+            "response": "Rent payment explanation.",
+            "sources": [{"similarity": 0.9}],
+        }
+
+    monkeypatch.setattr(
+        "app.services.accounting_intelligence.ask_rag_assistant",
+        mock_rag,
+    )
+
+    result = await explain_transaction(
+        "Paid rent in cash",
+        record_metrics=False,
+    )
+
+    assert result["journal_entry"] is None
+    assert result["review_required"] is True
+    assert "amount" in result["review_reason"].lower()
